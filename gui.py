@@ -1,6 +1,7 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
+import sqlite3
 
 # Registrar cadastro no banco
 def commit_dados(*args):
@@ -8,7 +9,7 @@ def commit_dados(*args):
         connection.text_factory = str
         c = connection.cursor()
         c.execute('CREATE TABLE IF NOT EXISTS dados (_id integer , nome text, cpf integer, curso varchar(30))')
-        c.execute('INSERT INTO dados (_id ,nome, cpf, cidade) VALUES (?,?,?,?)', (args))
+        c.execute('INSERT INTO dados (_id ,nome, cpf, curso) VALUES (?,?,?,?)', (args))
         connection.commit()
 
 class JanelaCadastro(Gtk.Window):
